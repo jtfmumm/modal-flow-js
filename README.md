@@ -33,6 +33,7 @@ For example:
 // Our modals 
 var EntryModal = Modal.buildWith({ /* configuration parameters */ })
 var SecondModal = Modal.buildWith({ /* configuration parameters */ })
+var ThirdModal = Modal.buildWith({ /* configuration parameters */ })
 var LowModal = Modal.buildWith({ /* configuration parameters */ })
 var HighModal = Modal.buildWith({ /* configuration parameters */ })
 
