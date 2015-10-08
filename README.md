@@ -72,7 +72,7 @@ This creates the following branching series:
 
 ## Modal Build Parameters
 
-Options that can be passed into Modal.buildWith().
+Options that can be passed into Modal.buildWith():
 
      initialize: An optional function for setting up local modal data and
         event listeners other than submit (e.g. for clicking cancel).
