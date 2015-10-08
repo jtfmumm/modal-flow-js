@@ -55,6 +55,13 @@ var workflowStart = Modal.link(EntryModal, branchFromSecond);
 workflowStart.load(); 
 ```
 
+This creates the following branching series:
+                                                 ->HighModal -> highExit
+                                               Y/
+    EntryModal -> SecondModal -> (high salary?)
+                                               N\
+                                                 ->LowModal -> lowExit
+
 
 ## Modal Build Parameters
 
@@ -89,44 +96,3 @@ Options that can be passed into Modal.buildWith().
      $form: jQuery object for when modal uses a form,
 
      $clickthroughLink: jQuery object for link when modal does not use a form
-
-## Build Modal Workflows
-
-    You can create a linked series of modals by using the chain method:
-        var series = Modal.chain(Modal1, Modal2, Modal3, Modal4);
-        series.load();
-
-    .chain() returns a Transition object.  Call load() or loadWith() on this
-    object to open Modal1 and begin the series.  Submitting Modal1 will
-    load Modal2 with Modal1's response data.  And so on with the others in
-    sequence.  You can optionally provide an exit function as the last
-    in the series.
-
-    If you need to branch based on the response data at some point in
-    the series, you can use the .link(), .linkBranches(), and .linkExit()
-    methods instead.  For example:
-
-        var chooseHighOrLow = function(data) {
-            if (data.salary > 99999) {
-                return exitForHighIncome.load();
-            } else {
-                return exitForLowIncome.load();
-            }
-        }
-        
-        var exitForHighIncome = Modal.linkExit(HighModal, highExit);
-        var exitForLowIncome = Modal.linkExit(LowModal, lowExit);
-        var branchFromSecond = Modal.linkBranches(SecondModal, chooseHighOrLow);
-        var startSeries = Modal.link(EntryModal, branchFromSecond);
-
-        startSeries.load();
-
-    This creates the following branching series:
-                                                     ->HighModal -> highExit
-                                                   Y/
-        EntryModal -> SecondModal -> (high salary?)
-                                                   N\
-                                                     ->LowModal -> lowExit
-
-    Note: the links are declared in reverse order because of the
-    need to define later links before referencing them in earlier links.
