@@ -1,4 +1,4 @@
-# modal-flow-js
+# ModalFlow.js
 A small JS library for modal workflows
 
 ## Build Modal
