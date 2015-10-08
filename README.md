@@ -31,12 +31,19 @@ For example:
 
 ```
 // Our modals 
-var EntryModal = Modal.buildWith({ ... })
-var SecondModal = Modal.buildWith({ ... })
-var LowModal = Modal.buildWith({ ... })
-var HighModal = Modal.buildWith({ ... })
+var EntryModal = Modal.buildWith({ /* configuration parameters */ })
+var SecondModal = Modal.buildWith({ /* configuration parameters */ })
+var LowModal = Modal.buildWith({ /* configuration parameters */ })
+var HighModal = Modal.buildWith({ /* configuration parameters */ })
 
-// A branching function 
+// Some exit functions
+var lowExit = function(data) { /* do something with data when exiting workflow */ }
+var highExit = function(data) { /* do something with data when exiting workflow */ }
+
+// Setting up the links (declared in reverse order because of variable hoisting)
+var exitForHighIncome = Modal.linkExit(HighModal, highExit);
+var exitForLowIncome = Modal.linkExit(LowModal, lowExit);
+
 var chooseHighOrLow = function(data) {
     if (data.salary > 99999) {
           return exitForHighIncome.load();
@@ -45,10 +52,8 @@ var chooseHighOrLow = function(data) {
     }
 }
 
-// Setting up the links (declared in reverse order)
-var exitForHighIncome = Modal.linkExit(HighModal, highExit);
-var exitForLowIncome = Modal.linkExit(LowModal, lowExit);
-var branchFromSecond = Modal.linkBranches(SecondModal, chooseHighOrLow);
+var branchFromThird = Modal.linkBranches(ThirdModal, chooseHighOrLow);
+var secondToThird = Modal.linkBranches(SecondModal, branchFromThird);
 var workflowStart = Modal.link(EntryModal, branchFromSecond);
 
 // Initialize and open the first modal, EntryModal
