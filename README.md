@@ -62,11 +62,11 @@ workflowStart.load();
 
 This creates the following branching series:  
 ```
-                                                 ->HighModal -> highExit  
-                                               Y/  
-    EntryModal -> SecondModal -> (high salary?)  
-                                               N\  
-                                                 ->LowModal -> lowExit  
+                                                              ->HighModal -> highExit  
+                                                            Y/  
+    EntryModal -> SecondModal -> ThirdModal -> (high salary?)  
+                                                            N\  
+                                                              ->LowModal -> lowExit  
 ```
 
 ## Modal Build Parameters
