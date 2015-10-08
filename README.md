@@ -1,7 +1,55 @@
 # ModalFlow.js
 A small JS library for modal workflows
 
-## Build Modal
+## Installation
+
+ModalFlow.js depends on jQuery.
+
+## Usage
+
+To create a modal, use Modal.buildWith(), passing in configuration parameters as outlined in Modal Build Parameters below.
+
+If there is no branching logic in your modal workflow, you can chain a series of modals together using
+
+```
+var chain = Modal.chain(Modal1, Modal2, Modal3, Modal4); // for however many modals you have
+chain.load(); // To open the first modal
+```
+
+You can think of your modal chain as a kind of data transformation pipeline. Each modal passes output along to the next
+modal's input. This output can include user UI input as well as response data from an ajax request associated with the 
+modal. The modal chain can end with an exit function which takes the output of the last modal as its argument.
+
+If you need branching, you can use a series of links. Because of hoisting, these need to be declared in reverse order.
+For example:
+
+```
+// Our modals 
+var EntryModal = Modal.buildWith({ ... })
+var SecondModal = Modal.buildWith({ ... })
+var LowModal = Modal.buildWith({ ... })
+var HighModal = Modal.buildWith({ ... })
+
+// A branching function 
+var chooseHighOrLow = function(data) {
+    if (data.salary > 99999) {
+          return exitForHighIncome.load();
+    } else {
+          return exitForLowIncome.load();
+    }
+}
+
+// Setting up the links
+var exitForHighIncome = Modal.linkExit(HighModal, highExit);
+var exitForLowIncome = Modal.linkExit(LowModal, lowExit);
+var branchFromSecond = Modal.linkBranches(SecondModal, chooseHighOrLow);
+var workflowStart = Modal.link(EntryModal, branchFromSecond);
+
+workflowStart.load(); // To open the first modal, EntryModal
+```
+
+
+## Modal Build Parameters
 
 Options that can be passed into Modal.buildWith().
 
@@ -51,11 +99,6 @@ Options that can be passed into Modal.buildWith().
     the series, you can use the .link(), .linkBranches(), and .linkExit()
     methods instead.  For example:
 
-        var exitForHighIncome = Modal.linkExit(HighModal, highExit);
-        var exitForLowIncome = Modal.linkExit(LowModal, lowExit);
-        var branchFromSecond = Modal.linkBranches(SecondModal, chooseHighOrLow);
-        var startSeries = Modal.link(EntryModal, branchFromSecond);
-
         var chooseHighOrLow = function(data) {
             if (data.salary > 99999) {
                 return exitForHighIncome.load();
@@ -63,6 +106,12 @@ Options that can be passed into Modal.buildWith().
                 return exitForLowIncome.load();
             }
         }
+        
+        var exitForHighIncome = Modal.linkExit(HighModal, highExit);
+        var exitForLowIncome = Modal.linkExit(LowModal, lowExit);
+        var branchFromSecond = Modal.linkBranches(SecondModal, chooseHighOrLow);
+        var startSeries = Modal.link(EntryModal, branchFromSecond);
+
         startSeries.load();
 
     This creates the following branching series:
