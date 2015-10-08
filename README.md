@@ -7,9 +7,15 @@ ModalFlow.js depends on jQuery.
 
 ## Usage
 
-To create a modal, use Modal.buildWith(), passing in configuration parameters as outlined in Modal Build Parameters below.
+To create a modal, use 
 
-If there is no branching logic in your modal workflow, you can chain a series of modals together using
+```
+var myModal = Modal.buildWith({ /* configuration parameters */ })
+```
+
+Pass in configuration parameters as outlined in the Modal Build Parameters section below.
+
+If there is no branching logic in your modal workflow, you can chain a series of modals together using:
 
 ```
 var chain = Modal.chain(Modal1, Modal2, Modal3, Modal4); // for however many modals you have
@@ -20,7 +26,7 @@ You can think of your modal chain as a kind of data transformation pipeline. Eac
 modal's input. This output can include user UI input as well as response data from an ajax request associated with the 
 modal. The modal chain can end with an exit function which takes the output of the last modal as its argument.
 
-If you need branching, you can use a series of links. Because of hoisting, these need to be declared in reverse order.
+If you need branching, you can use a series of links. Because of hoisting, these links need to be declared in reverse order.
 For example:
 
 ```
@@ -39,13 +45,14 @@ var chooseHighOrLow = function(data) {
     }
 }
 
-// Setting up the links
+// Setting up the links (declared in reverse order)
 var exitForHighIncome = Modal.linkExit(HighModal, highExit);
 var exitForLowIncome = Modal.linkExit(LowModal, lowExit);
 var branchFromSecond = Modal.linkBranches(SecondModal, chooseHighOrLow);
 var workflowStart = Modal.link(EntryModal, branchFromSecond);
 
-workflowStart.load(); // To open the first modal, EntryModal
+// Initialize and open the first modal, EntryModal
+workflowStart.load(); 
 ```
 
 
