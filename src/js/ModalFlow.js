@@ -1,6 +1,7 @@
-// ModalFlow.js
-// TheLadders 2015
-// MIT License
+//     ModalFlow.js 0.0.1
+
+//     (c) 2015 TheLadders
+//     ModalFlow may be freely distributed under the MIT license.
 
 var $ = require("jquery");
 
