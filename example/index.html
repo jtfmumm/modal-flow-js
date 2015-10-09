@@ -1,0 +1,76 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+    
+    <div class="row">
+      <div class="large-12 columns">
+        <h1>ModalFlow Example</h1>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="panel">
+           <button id="data-passing-chain-button">Data Passing Modal Chain</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-step-1"
+         class="reveal-modal"
+         style="display:none;"
+         data-reveal="">
+
+      <div class="modal-header modal-header-background">
+        <div class="modal-title" data-js="registration-modal__billing-details-heading">Modal Step 1</div>
+      </div>
+
+      <div class="modal-body">
+        <label for="step-1-input">Enter a word
+          <input type="text" id="step-1-input" />
+        </label>
+
+        <button id="modal-step-1-clickthrough">Next</button>
+
+          <a class="close-reveal-modal" data-js="registration-modal__cancel-billing">&#215;</a>
+      </div>
+    </div>
+
+    <div id="modal-step-2"
+         class="reveal-modal"
+         style="display:none;"
+         data-reveal="">
+
+      <div class="modal-header modal-header-background">
+        <div class="modal-title" data-js="registration-modal__billing-details-heading">Modal Step 2</div>
+      </div>
+
+      <div class="modal-body">
+        <div id="step-2-last"></div>
+
+        <label for="step-2-input">Enter another word
+          <input type="text" id="step-2-input" />
+        </label>
+
+        <button id="modal-step-2-clickthrough">Next</button>
+
+        <a class="close-reveal-modal" data-js="registration-modal__cancel-billing">&#215;</a>
+      </div>
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/ModalFlow.js"></script>
+    <script src="js/ModalChains.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
