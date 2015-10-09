@@ -3,7 +3,9 @@ A small JS library for modal workflows
 
 ## Installation
 
-ModalFlow.js depends on jQuery.
+ModalFlow works with AMD, CommonJS-style, or html import in a script tag. 
+
+ModalFlow.js depends on jQuery. The current version uses Foundation reveal for modal display.
 
 ## Usage
 
