@@ -7,7 +7,7 @@ ModalFlow works with AMD, CommonJS-style, or html import in a script tag.
 
 ModalFlow.js depends on jQuery. The current version uses Foundation reveal for modal display.
 
-An example project is available at /examples/index.html. This project currently only shows a 
+An example project is available at /example/index.html. This project currently only shows a 
 data passing modal flow without ajax calls (everything in the example is client-side).
 
 ## Usage
